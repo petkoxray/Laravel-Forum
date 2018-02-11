@@ -28,7 +28,7 @@
         @auth
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <form method="POST" action="{{ route('add_reply', $thread) }}">
+                    <form method="POST" action="{{ route('store_reply',[$thread->channel, $thread]) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">

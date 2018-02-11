@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\ThreadFilters;
+use App\Http\Requests\StoreThread;
+use App\Models\Channel;
 use Illuminate\Http\Request;
-use App\Thread;
+use App\Models\Thread;
 
 class ThreadsController extends Controller
 {
@@ -16,13 +19,19 @@ class ThreadsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  Channel $channel
+     * @param ThreadFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Channel $channel, ThreadFilters $filters)
     {
-        $threads = Thread::latest()->get();
+        $threads = Thread::latest()->filter($filters);
 
-        return view('threads.index', compact('threads'));
+        if ($channel->exists) {
+            $threads->where('channel_id', $channel->id);
+        }
+
+        return view('threads.index', ['threads' => $threads->get()]);
     }
 
     /**
@@ -38,17 +47,15 @@ class ThreadsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param StoreThread $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreThread $request)
     {
-        /**
-         * @var Thread $thread
-         */
         $thread = Thread::create([
             'user_id' => auth()->id(),
             'title' => request('title'),
+            'channel_id' => request('channel_id'),
             'body' => request('body')
         ]);
 
@@ -58,10 +65,11 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Thread $thread
+     * @param Channel $channel
+     * @param  \App\Models\Thread $thread
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
+    public function show(Channel $channel, Thread $thread)
     {
         return view('threads.show', compact('thread'));
     }
@@ -69,7 +77,7 @@ class ThreadsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Thread $thread
+     * @param  \App\Models\Thread $thread
      * @return \Illuminate\Http\Response
      */
     public function edit(Thread $thread)
@@ -81,7 +89,7 @@ class ThreadsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Thread $thread
+     * @param  \App\Models\Thread $thread
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Thread $thread)
@@ -92,7 +100,7 @@ class ThreadsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Thread $thread
+     * @param  \App\Models\Thread $thread
      * @return \Illuminate\Http\Response
      */
     public function destroy(Thread $thread)

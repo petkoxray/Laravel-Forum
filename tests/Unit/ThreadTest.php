@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Thread;
+use App\Models\Thread;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -19,7 +19,7 @@ class ThreadTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = create('App\Thread');
+        $this->thread = create('App\Models\Thread');
     }
 
     /** @test */
@@ -33,7 +33,7 @@ class ThreadTest extends TestCase
     /** @test */
     function a_thread_has_a_creator()
     {
-        $this->assertInstanceOf('App\User', $this->thread->creator);
+        $this->assertInstanceOf('App\Models\User', $this->thread->creator);
     }
 
     /** @test */
@@ -45,5 +45,13 @@ class ThreadTest extends TestCase
         ]);
 
         $this->assertCount(1, $this->thread->replies);
+    }
+
+    /** @test */
+    public function a_thread_belongs_to_a_channel()
+    {
+        $thread = create('App\Models\Thread');
+
+        $this->assertInstanceOf('App\Models\Channel', $thread->channel);
     }
 }

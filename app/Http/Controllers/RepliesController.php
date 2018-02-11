@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Thread;
+use App\Http\Requests\StoreReply;
+use App\Models\Channel;
+use App\Models\Thread;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller
@@ -15,9 +17,12 @@ class RepliesController extends Controller
     /**
      * Add a reply to the thread
      *
+     * @param StoreReply $request
+     * @param Channel $channel
+     * @param Thread $thread
      * @return \Illuminate\Http\Response
      */
-    public function store(Thread $thread)
+    public function store(StoreReply $request, Channel $channel, Thread $thread)
     {
         $thread->addReply([
             'body' => request('body'),
