@@ -8,23 +8,57 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    /**
+     * Don't auto-apply mass assignment protection.
+     *
+     * @var array
+     */
     protected $guarded = [];
 
-    public function path(): string
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('replyCount', function (Builder $builder) {
+            $builder->withCount('replies');
+        });
+    }
+
+    /**
+     * Get a string path for the thread.
+     *
+     * @return string
+     */
+    public function path()
     {
         return "/threads/{$this->channel->slug}/{$this->id}";
     }
 
+    /**
+     * A Thread may have many replies
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function replies()
     {
         return $this->hasMany(Reply::class);
     }
 
+    /**
+     * Get the creator of the Thread
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function creator()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * A Thread have a Channel
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function channel()
     {
         return $this->belongsTo(Channel::class, 'channel_id');
@@ -43,11 +77,11 @@ class Thread extends Model
     /**
      * Apply all relevant thread filters.
      *
-     * @param  Builder       $query
+     * @param  Builder $query
      * @param  ThreadFilters $filters
      * @return Builder
      */
-    public function scopeFilter($query, ThreadFilters $filters)
+    public function scopeFilter(Builder $query, ThreadFilters $filters)
     {
         return $filters->apply($query);
     }

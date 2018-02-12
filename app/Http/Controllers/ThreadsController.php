@@ -10,6 +10,7 @@ use App\Models\Thread;
 
 class ThreadsController extends Controller
 {
+    const REPLIES_PER_PAGE = 10;
 
     public function __construct()
     {
@@ -35,7 +36,7 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new thread.
      *
      * @return \Illuminate\Http\Response
      */
@@ -45,7 +46,7 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created thread in storage.
      *
      * @param StoreThread $request
      * @return \Illuminate\Http\Response
@@ -63,7 +64,7 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified thread.
      *
      * @param Channel $channel
      * @param  \App\Models\Thread $thread
@@ -71,11 +72,14 @@ class ThreadsController extends Controller
      */
     public function show(Channel $channel, Thread $thread)
     {
-        return view('threads.show', compact('thread'));
+        return view('threads.show', [
+            'thread' => $thread,
+            'replies' => $thread->replies()->paginate(static::REPLIES_PER_PAGE)
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified thread.
      *
      * @param  \App\Models\Thread $thread
      * @return \Illuminate\Http\Response
@@ -86,7 +90,7 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified thread in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\Thread $thread

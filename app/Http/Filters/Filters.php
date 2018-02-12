@@ -26,11 +26,6 @@ abstract class Filters
      */
     protected $filters = [];
 
-    /**
-     * Create a new ThreadFilters instance.
-     *
-     * @param Request $request
-     */
     public function __construct(Request $request)
     {
         $this->request = $request;
