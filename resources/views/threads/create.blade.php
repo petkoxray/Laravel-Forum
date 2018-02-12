@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Publish</button>
                             </div>
-                            @include('layouts.errors')
+                            @include('layouts._errors')
                         </form>
 
                     </div>

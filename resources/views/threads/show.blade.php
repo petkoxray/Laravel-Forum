@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="#">{{ $thread->creator->name }}</a> posted:
+                        <a href="{{route('user_profile', $thread->creator->name)}}">{{ $thread->creator->name }}</a> posted:
                         {{ $thread->title }}
                     </div>
 
@@ -16,7 +16,7 @@
                 </div>
 
                 @foreach ($replies as $reply)
-                    @include ('threads.reply')
+                    @include ('threads._reply')
                 @endforeach
 
                 {{ $replies->links() }}
@@ -50,6 +50,6 @@
                 </div>
             </div>
         </div>
-        @include('layouts.errors')
+        @include('layouts._errors')
     </div>
 @endsection

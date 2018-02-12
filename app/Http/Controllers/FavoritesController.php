@@ -13,12 +13,15 @@ class FavoritesController extends Controller
     }
 
     /**
-     * Favorite a reply
+     * Like a reply
      *
      * @param Reply $reply
+     * @return Request
      */
     public function store(Reply $reply)
     {
         $reply->favorite();
+
+        return back();
     }
 }
