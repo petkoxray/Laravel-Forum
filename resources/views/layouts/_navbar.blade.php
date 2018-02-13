@@ -41,9 +41,11 @@
                        aria-expanded="false">Channels <span class="caret"></span></a>
 
                     <ul class="dropdown-menu">
-                        @foreach ($channels as $channel)
+                        @forelse ($channels as $channel)
                             <li><a href="/threads/{{ $channel->slug }}">{{ $channel->name }}</a></li>
-                        @endforeach
+                        @empty
+                            <h4>No records for this channel :(</h4>
+                        @endforelse
                     </ul>
                 </li>
             </ul>
@@ -62,6 +64,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('user_profile', Auth::user())}}">My Profile</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreThread;
 use App\Models\Channel;
 use Illuminate\Http\Request;
 use App\Models\Thread;
+use Illuminate\Http\Response;
 
 class ThreadsController extends Controller
 {
@@ -22,7 +23,7 @@ class ThreadsController extends Controller
      *
      * @param  Channel $channel
      * @param ThreadFilters $filters
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(Channel $channel, ThreadFilters $filters)
     {
@@ -38,7 +39,7 @@ class ThreadsController extends Controller
     /**
      * Show the form for creating a new thread.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -49,7 +50,7 @@ class ThreadsController extends Controller
      * Store a newly created thread in storage.
      *
      * @param StoreThread $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(StoreThread $request)
     {
@@ -67,8 +68,8 @@ class ThreadsController extends Controller
      * Display the specified thread.
      *
      * @param Channel $channel
-     * @param  \App\Models\Thread $thread
-     * @return \Illuminate\Http\Response
+     * @param  Thread $thread
+     * @return Response
      */
     public function show(Channel $channel, Thread $thread)
     {
@@ -81,8 +82,8 @@ class ThreadsController extends Controller
     /**
      * Show the form for editing the specified thread.
      *
-     * @param  \App\Models\Thread $thread
-     * @return \Illuminate\Http\Response
+     * @param  Thread $thread
+     * @return Response
      */
     public function edit(Thread $thread)
     {
@@ -94,7 +95,7 @@ class ThreadsController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\Thread $thread
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Thread $thread)
     {
@@ -102,13 +103,25 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified thread from storage.
      *
+     * @param Channel $channel
      * @param  \App\Models\Thread $thread
-     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Exception
+     *
+     * @return Response
      */
-    public function destroy(Thread $thread)
+    public function destroy(Channel $channel, Thread $thread)
     {
-        //
+        $this->authorize('delete', $thread);
+
+        $thread->delete();
+
+        if (request()->wantsJson()) {
+            return response([], 204);
+        }
+
+        return redirect()->route('all_threads');
     }
 }
