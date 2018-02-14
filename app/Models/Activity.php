@@ -12,4 +12,26 @@ class Activity extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Fetch the associated subject for the activity.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function subject()
+    {
+        return $this->morphTo();
+    }
+
+    public static function feed(User $user, int $take = 50)
+    {
+        return $user->activity()
+            ->latest()
+            ->with('subject')
+            ->take($take)
+            ->get()
+            ->groupBy(function ($activity) {
+                return $activity->created_at->format('Y-m-d');
+            });
+    }
 }
