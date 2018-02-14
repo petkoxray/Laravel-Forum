@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Traits\Favoritable;
+use App\Models\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-    use Favoritable;
+    use Favoritable, RecordsActivity;
 
     /**
      * Don't auto-apply mass assignment protection.

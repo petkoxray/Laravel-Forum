@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Models\Traits;
+
+trait RecordsActivity
+{
+    /**
+     * Boot the trait.
+     */
+    protected static function bootRecordsActivity()
+    {
+        if (auth()->guest()) {
+            return;
+        }
+
+        foreach (static::getActivitiesToRecord() as $event) {
+            static::$event(function ($model) use ($event) {
+                $model->recordActivity($event);
+            });
+        }
+    }
+
+    /**
+     * Fetch all model events that require activity recording.
+     *
+     * @return array
+     */
+    protected static function getActivitiesToRecord()
+    {
+        return ['created'];
+    }
+
+    /**
+     * Records an Activity in database
+     *
+     * @param $event
+     * @throws \ReflectionException
+     */
+    protected function recordActivity($event)
+    {
+        $this->activity()->create([
+            'user_id' => auth()->id(),
+            'type' => $this->getActivityType($event)
+        ]);
+    }
+
+    /**
+     * Determine the activity type.
+     *
+     * @param  string $event
+     * @return string
+     * @throws \ReflectionException
+     */
+    protected function getActivityType($event)
+    {
+        $type = strtolower((new \ReflectionClass($this))->getShortName());
+        return "{$event}_{$type}";
+    }
+
+    /**
+     * Fetch the activity relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function activity()
+    {
+        return $this->morphMany('App\Models\Activity', 'subject');
+    }
+}

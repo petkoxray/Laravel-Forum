@@ -42,7 +42,7 @@ class ThreadPolicy
      */
     public function update(User $user, Thread $thread)
     {
-        return $user->id === $thread->user_id;
+        return $user->id == $thread->user_id;
     }
 
     /**
@@ -54,6 +54,6 @@ class ThreadPolicy
      */
     public function delete(User $user, Thread $thread)
     {
-        return $user->id === $thread->user_id;
+        return $user->id == $thread->user_id;
     }
 }
