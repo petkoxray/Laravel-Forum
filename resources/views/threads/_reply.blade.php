@@ -8,15 +8,11 @@
                     </a> said {{ $reply->created_at->diffForHumans() }}...
                 </h5>
 
-                <div>
-                    <form method="POST" action="{{route('favorite_reply', $reply)}}">
-                        {{ csrf_field() }}
-
-                        <button type="submit" class="btn btn-default" {{ $reply->isFavorited() ? 'disabled' : '' }}>
-                            {{ $reply->favorites_count }} {{ str_plural('Like', $reply->favorites_count) }}
-                        </button>
-                    </form>
-                </div>
+                @auth
+                    <div>
+                        <favorite :reply="{{$reply}}"></favorite>
+                    </div>
+                @endauth
 
             </div>
 
@@ -37,12 +33,6 @@
             <div class="panel-footer level">
                 <button type="submit" @click="editing = true" class="btn btn-xs">Edit</button>
                 <button type="submit" @click="destroy" class="btn btn-danger btn-xs">Delete</button>
-
-                {{--<form method="POST" action="/replies/{{ $reply->id }}">--}}
-                    {{--{{ csrf_field() }}--}}
-                    {{--{{ method_field('DELETE') }}--}}
-
-                {{--</form>--}}
             </div>
         @endcan
     </div>

@@ -18,6 +18,11 @@ class Reply extends Model
     protected $guarded = [];
 
     /**
+     * @var array
+     */
+    protected $appends = ['favoritesCount', 'isFavorited'];
+
+    /**
      * The relations to eager load on every query.
      *
      * @var array
