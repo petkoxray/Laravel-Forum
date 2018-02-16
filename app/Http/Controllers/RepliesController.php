@@ -25,12 +25,17 @@ class RepliesController extends Controller
      */
     public function store(StoreReply $request, Channel $channel, Thread $thread)
     {
-        $thread->addReply([
+        $reply = $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id()
         ]);
 
-        return back();
+        if (request()->expectsJson()) {
+            return $reply->load('owner');
+        }
+
+        return back()
+            ->with('flash', 'Reply has been posted!');
     }
 
     /**

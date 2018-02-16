@@ -15,8 +15,10 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = {!! json_encode([
+        window.App = {!! json_encode([
             'csrfToken' => csrf_token(),
+             'user' => Auth::user(),
+             'signedIn' => Auth::check()
         ]) !!};
     </script>
     <style>
@@ -33,13 +35,17 @@
             flex: 1;
         }
 
-        [v-cloak] {display: none}
+        [v-cloak] {
+            display: none
+        }
     </style>
 </head>
 <body>
 <div id="app">
     @include('layouts._navbar')
     @yield('content')
+
+    <flash message="{{ session('flash') }}"></flash>
 </div>
 
 <!-- Scripts -->
