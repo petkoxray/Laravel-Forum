@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Events\ThreadHasNewReply;
 use App\Filters\ThreadFilters;
 use App\Models\Traits\RecordsActivity;
-use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -88,10 +88,7 @@ class Thread extends Model
     {
         $reply = $this->replies()->create($reply);
 
-        foreach ($this->subscriptions as $subscription) {
-            if ($subscription->user_id != $reply->user_id)
-                $subscription->user->notify(new ThreadWasUpdated($this, $reply));
-        }
+        event(new ThreadHasNewReply($this, $reply));
 
         return $reply;
     }
