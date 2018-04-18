@@ -1,14 +1,17 @@
 <template>
-    <button :class="classes" @click="subscribe">Subscribe</button>
+    <button :class="classes" @click="subscribe" v-text="text"></button>
 </template>
 
 <script>
     export default {
         props: ['active'],
         computed: {
-          classes() {
-              return ['btn', this.active ? 'btn-primary' : 'btn-default']
-          }
+            classes() {
+                return ['btn', this.active ? 'btn-warning' : 'btn-primary']
+            },
+            text() {
+                return this.active ? 'Unsubscribe' : 'Subscribe'
+            }
         },
         methods: {
             subscribe() {
