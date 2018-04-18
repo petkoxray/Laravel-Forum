@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Exceptions\ThrottleException;
+use App\Models\Reply;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreReply extends FormRequest
 {
@@ -13,7 +16,21 @@ class StoreReply extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('create', new Reply());
+    }
+
+    /**
+     * Handle a failed authorization attempt.
+     *
+     * @return void
+     *
+     * @throws ThrottleException
+     */
+    protected function failedAuthorization()
+    {
+        throw new ThrottleException(
+            'You are replying too frequently. Please take a break.'
+        );
     }
 
     /**
@@ -24,7 +41,7 @@ class StoreReply extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required',
+            'body' => 'required|spamfree',
         ];
     }
 }

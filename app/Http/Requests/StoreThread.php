@@ -25,7 +25,7 @@ class StoreThread extends FormRequest
     {
         return [
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id'
         ];
     }

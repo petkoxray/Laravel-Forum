@@ -36,17 +36,10 @@ class RepliesController extends Controller
      */
     public function store(StoreReply $request, Channel $channel, Thread $thread)
     {
-        $reply = $thread->addReply([
+        return $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id()
-        ]);
-
-        if (request()->expectsJson()) {
-            return $reply->load('owner');
-        }
-
-        return back()
-            ->with('flash', 'Reply has been posted!');
+        ])->load('owner');
     }
 
     /**
@@ -75,7 +68,5 @@ class RepliesController extends Controller
         if (request()->expectsJson()) {
             return response(['status' => 'Reply deleted!']);
         }
-
-        return back();
     }
 }

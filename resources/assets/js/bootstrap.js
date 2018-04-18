@@ -50,8 +50,8 @@ if (token) {
 
 window.events = new Vue();
 
-window.flash = function (message) {
-    window.events.$emit('flash', message);
+window.flash = function (message, type = 'success') {
+    window.events.$emit('flash', {message, type});
 };
 
 /**
