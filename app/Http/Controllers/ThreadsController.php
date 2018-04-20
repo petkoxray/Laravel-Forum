@@ -33,7 +33,8 @@ class ThreadsController extends Controller
             $threads->where('channel_id', $channel->id);
         }
 
-        return view('threads.index', ['threads' => $threads->get()]);
+        return view('threads.index',
+            ['threads' => $threads->paginate(5)]);
     }
 
     /**

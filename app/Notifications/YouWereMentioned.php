@@ -5,8 +5,6 @@ namespace App\Notifications;
 use App\Models\Reply;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class YouWereMentioned extends Notification
 {
@@ -59,7 +57,7 @@ class YouWereMentioned extends Notification
     {
         return [
             'message' => "{$this->reply->owner->name} mentioned in {$this->reply->thread->title}",
-            'path' => $this->reply->path()
+            'link' => $this->reply->path()
         ];
     }
 }
