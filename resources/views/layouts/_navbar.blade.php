@@ -69,6 +69,8 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{route('user_profile', Auth::user())}}">My Profile</a></li>
+                            <li><a href="{{route('user_settings', Auth::user())}}">My Settings</a></li>
+
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

@@ -18,6 +18,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar_path'
     ];
 
     /**
@@ -42,6 +43,8 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all user threads
+     *
      * @return \Illuminate\Database\Query\Builder|static
      */
     public function threads()
@@ -49,13 +52,31 @@ class User extends Authenticatable
         return $this->hasMany(Thread::class)->latest();
     }
 
+    /**
+     * Return user activities
+     *
+     */
     public function activity()
     {
         return $this->hasMany(Activity::class);
     }
 
+    /**
+     * Return Last User Reply
+     */
     public function lastReply()
     {
         return $this->hasOne(Reply::class)->latest();
+    }
+
+    /**
+     * Get the path to the user's avatar.
+     *
+     * @param  string $avatar
+     * @return string
+     */
+    public function getAvatarPathAttribute($avatar)
+    {
+        return $avatar ? asset('storage/' . $avatar)  : 'images/avatars/default.png';
     }
 }

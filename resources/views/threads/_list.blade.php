@@ -10,7 +10,14 @@
                     </h4>
                     <h5>
                         Posted
-                        by: <a href="{{route('user_profile', $thread->creator)}}"> {{$thread->creator->name}}</a>
+                        by:
+                        <img src="{{ $thread->creator->avatar_path }}"
+                             alt="{{ $thread->creator->name }}"
+                             width="25"
+                             height="25"
+                             class="mr-1">
+                        <a href="{{route('user_profile', $thread->creator)}}"> {{$thread->creator->name}}</a>
+
                     </h5>
                 </div>
 
