@@ -7,10 +7,11 @@ use App\Filters\ThreadFilters;
 use App\Models\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Thread extends Model
 {
-    use RecordsActivity;
+    use RecordsActivity, Sluggable;
 
     /**
      * Don't auto-apply mass assignment protection.
@@ -34,7 +35,7 @@ class Thread extends Model
             $builder->withCount('replies');
         });
 
-        static::deleting(function(Thread $thread) {
+        static::deleting(function (Thread $thread) {
             $thread->replies->each->delete();
         });
     }
@@ -46,7 +47,7 @@ class Thread extends Model
      */
     public function path()
     {
-        return "/threads/{$this->channel->slug}/{$this->id}";
+        return "/threads/{$this->channel->slug}/{$this->slug}";
     }
 
     /**
@@ -77,6 +78,30 @@ class Thread extends Model
     public function channel()
     {
         return $this->belongsTo(Channel::class, 'channel_id');
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+    /**
+     * Get the route key name for Laravel.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     /**
