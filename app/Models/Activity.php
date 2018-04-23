@@ -29,7 +29,6 @@ class Activity extends Model
             ->latest()
             ->with('subject')
             ->take($take)
-            ->get()
             ->groupBy(function ($activity) {
                 return $activity->created_at->format('Y-m-d');
             });

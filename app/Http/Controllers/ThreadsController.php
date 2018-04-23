@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Filters\ThreadFilters;
 use App\Http\Requests\StoreThread;
 use App\Models\Channel;
+use App\Widgets\Trending;
 use Illuminate\Http\Request;
 use App\Models\Thread;
 use Illuminate\Http\Response;
@@ -13,9 +14,15 @@ class ThreadsController extends Controller
 {
     const REPLIES_PER_PAGE = 10;
 
-    public function __construct()
+    /**
+     * @var Trending
+     */
+    private $trending;
+
+    public function __construct(Trending $trending)
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->trending = $trending;
     }
 
     /**
@@ -33,8 +40,10 @@ class ThreadsController extends Controller
             $threads->where('channel_id', $channel->id);
         }
 
-        return view('threads.index',
-            ['threads' => $threads->paginate(5)]);
+        return view('threads.index', [
+            'threads' => $threads->paginate(5),
+            'trending' => $this->trending->get()
+        ]);
     }
 
     /**
@@ -75,6 +84,8 @@ class ThreadsController extends Controller
      */
     public function show(Channel $channel, Thread $thread)
     {
+        $this->trending->push($thread);
+
         return view('threads.show', compact('thread'));
     }
 

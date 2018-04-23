@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+
                 <div class="page-header">
                     <h1>
                         {{ $profileUser->name }}
@@ -19,6 +20,7 @@
                 @empty
                     <h3>Sorry, user has no activities yet :(</h3>
                 @endforelse
+
             </div>
         </div>
     </div>
