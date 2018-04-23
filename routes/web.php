@@ -1,10 +1,12 @@
 <?php
 
 Auth::routes();
+Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register_confirm');
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/threads', 'ThreadsController@index')->name('all_threads');
-Route::post('/threads', 'ThreadsController@store')->name('store_new_thread');
+Route::post('/threads', 'ThreadsController@store')->name('store_new_thread')->middleware('must-be-confirmed');
 Route::get('/threads/create', 'ThreadsController@create')->name('create_thread');
 Route::get('/threads/{channel}', 'ThreadsController@index');
 Route::get('/threads/{channel}/{thread}', 'ThreadsController@show')->name('show_thread');

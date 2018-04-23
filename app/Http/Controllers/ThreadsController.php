@@ -85,6 +85,7 @@ class ThreadsController extends Controller
     public function show(Channel $channel, Thread $thread)
     {
         $this->trending->push($thread);
+        $thread->increment('visits');
 
         return view('threads.show', compact('thread'));
     }

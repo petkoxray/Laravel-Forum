@@ -79,4 +79,12 @@ class User extends Authenticatable
     {
         return $avatar ? asset('storage/' . $avatar) : asset('images/avatars/default.png');
     }
+
+    public function confirm()
+    {
+        $this->confirmed = true;
+        $this->confirmation_token = null;
+
+        $this->save();
+    }
 }

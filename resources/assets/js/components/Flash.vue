@@ -1,6 +1,9 @@
 <template>
-    <div class="alert alert-flash" :class="'alert-' + type"
-         role="alert" v-show="show" v-text="body">
+    <div class="alert alert-flash"
+         :class="'alert-'+type"
+         role="alert"
+         v-show="show"
+         v-text="body">
     </div>
 </template>
 
@@ -10,7 +13,7 @@
 
         data() {
             return {
-                body: '',
+                body: this.message,
                 type: 'success',
                 show: false
             }
@@ -18,7 +21,7 @@
 
         created() {
             if (this.message) {
-                this.flash(this.message);
+                this.flash();
             }
 
             window.events.$on(
@@ -28,8 +31,11 @@
 
         methods: {
             flash(data) {
-                this.body = data.message;
-                this.type = data.type;
+                if (data) {
+                    this.body = data.message;
+                    this.type = data.type;
+                }
+
                 this.show = true;
 
                 this.hide();
