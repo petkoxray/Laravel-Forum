@@ -26,6 +26,8 @@ class FavoritesController extends Controller
     }
 
     /**
+     * Unlike a reply
+     *
      * @param Reply $reply
      */
     public function destroy(Reply $reply)

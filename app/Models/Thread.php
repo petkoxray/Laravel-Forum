@@ -130,6 +130,9 @@ class Thread extends Model
         return $filters->apply($query);
     }
 
+    /**
+     * Subscribe User to thread
+     */
     public function subscribe()
     {
         $this->subscriptions()->create([
@@ -137,12 +140,17 @@ class Thread extends Model
         ]);
     }
 
+    /**
+     * Unsubscribe user from thread
+     */
     public function unsubscribe()
     {
         $this->subscriptions()->where('user_id', auth()->id())->delete();
     }
 
     /**
+     * Get all Thread subscriptions
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function subscriptions()
@@ -155,5 +163,15 @@ class Thread extends Model
         return $this->subscriptions()
             ->where('user_id', auth()->id())
             ->exists();
+    }
+
+    /**
+     * Mark a reply as best answer
+     *
+     * @param Reply $reply
+     */
+    public function markBestReply(Reply $reply)
+    {
+        $this->update(['best_reply_id' => $reply->id]);
     }
 }

@@ -3,6 +3,15 @@
 Auth::routes();
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register_confirm');
 
+Route::get('/profiles/{user}', 'ProfilesController@show')->name('user_profile');
+Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy')->name('remove_notification');
+Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index')->name('user_notifications');
+
+Route::get('api/users', "Api\UsersController@index")->middleware('auth')->name('users');
+
+Route::get('users/{user}/settings/', 'UserSettingsController@index')->middleware('auth')->name('user_settings');
+Route::post('users/{user}/avatar', 'UserSettingsController@store_avatar')->middleware('auth')->name('store_avatar');
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/threads', 'ThreadsController@index')->name('all_threads');
@@ -22,12 +31,4 @@ Route::delete('/replies/{reply}', 'RepliesController@destroy')->name('destroy_re
 
 Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy')->name('favorite_reply');
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store')->name('favorite_reply');
-
-Route::get('/profiles/{user}', 'ProfilesController@show')->name('user_profile');
-Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy')->name('remove_notification');
-Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index')->name('user_notifications');
-
-Route::get('api/users', "Api\UsersController@index")->middleware('auth')->name('users');
-
-Route::get('users/{user}/settings/', 'UsersSettingsController@index')->middleware('auth')->name('user_settings');
-Route::post('users/{user}/avatar', 'UsersSettingsController@store_avatar')->middleware('auth')->name('store_avatar');
+Route::post('/replies/{reply}/best', 'BestRepliesController@store')->name('store_best_reply');

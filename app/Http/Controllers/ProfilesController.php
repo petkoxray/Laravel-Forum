@@ -10,6 +10,8 @@ class ProfilesController extends Controller
 {
 
     /**
+     * Show a user profile and activity feed
+     *
      * @param User $user
      * @return \Illuminate\Http\Response
      */

@@ -13,6 +13,8 @@ class ThreadSubscriptions extends Controller
     }
 
     /**
+     * Subscribe to forum thread
+     *
      * @param $channelId
      * @param Thread $thread
      */
@@ -22,6 +24,8 @@ class ThreadSubscriptions extends Controller
     }
 
     /**
+     * Unsubscribe from forum thread
+     *
      * @param $channelId
      * @param Thread $thread
      */

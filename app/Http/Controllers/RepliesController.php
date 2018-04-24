@@ -43,6 +43,8 @@ class RepliesController extends Controller
     }
 
     /**
+     * Edit a reply
+     *
      * @param Reply $reply
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -56,6 +58,8 @@ class RepliesController extends Controller
     }
 
     /**
+     * Delete a reply
+     *
      * @param Reply $reply
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
