@@ -7,7 +7,7 @@ use Exception;
 class KeyHeldDown implements SpamRulesInterface
 {
     /**
-     * Detect spam.
+     * Detect key held down spam.
      *
      * @param  string $body
      * @throws \Exception

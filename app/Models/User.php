@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Traits\RoleTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, RoleTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -55,6 +56,7 @@ class User extends Authenticatable
     /**
      * Return user activities
      *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function activity()
     {
@@ -62,7 +64,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Return Last User Reply
+     * Return user last reply
+     *
+     * @return \Illuminate\Database\Query\Builder|static
      */
     public function lastReply()
     {
@@ -80,6 +84,9 @@ class User extends Authenticatable
         return $avatar ? asset('storage/' . $avatar) : asset('images/avatars/default.png');
     }
 
+    /**
+     *Confirm user account
+     */
     public function confirm()
     {
         $this->confirmed = true;

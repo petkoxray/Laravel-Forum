@@ -9,11 +9,21 @@ class ThreadSubscription extends Model
 {
     protected $guarded = [];
 
+    /**
+     * Subscription belongs to user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Subscription belongs to thread
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function thread()
     {
         return $this->belongsTo(Thread::class);

@@ -23,6 +23,12 @@ class Activity extends Model
         return $this->morphTo();
     }
 
+    /**
+     * Fetch User activity feed
+     *
+     * @param User $user
+     * @param int $take
+     */
     public static function feed(User $user, int $take = 50)
     {
         return $user->activity()

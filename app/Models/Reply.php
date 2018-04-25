@@ -31,7 +31,7 @@ class Reply extends Model
     protected $with = ['owner', 'favorites'];
 
     /**
-     * A reply belongs to a thread.
+     * A reply have owner
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -41,6 +41,8 @@ class Reply extends Model
     }
 
     /**
+     * A reply belongs to a thread.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function thread()
@@ -49,6 +51,8 @@ class Reply extends Model
     }
 
     /**
+     * Reply path
+     *
      * @return string
      */
     public function path()

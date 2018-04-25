@@ -32,3 +32,5 @@ Route::delete('/replies/{reply}', 'RepliesController@destroy')->name('destroy_re
 Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy')->name('favorite_reply');
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store')->name('favorite_reply');
 Route::post('/replies/{reply}/best', 'BestRepliesController@store')->name('store_best_reply');
+
+Route::get('/admin', 'Admin\HomeController@index')->middleware('roles:admin');
