@@ -23,7 +23,7 @@ class RoleMiddleware
         $roles = is_array($role)
             ? $role
             : explode('|', $role);
-            
+
         if (! Auth::user()->hasAnyRole($roles)) {
             return redirect('/');
         }

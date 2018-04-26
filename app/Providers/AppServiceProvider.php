@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
+
+        \Blade::if('role', function ($role) {
+            return auth()->check() && auth()->user()->hasRole($role);
+        });
     }
 
     /**

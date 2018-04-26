@@ -3,14 +3,23 @@
     import SubscribeButton from '../components/SubscribeButton';
 
     export default {
-        props: ['initialRepliesCount'],
+        props: ['thread'],
 
         components: {Replies, SubscribeButton},
 
         data() {
             return {
-                repliesCount: this.initialRepliesCount
+                repliesCount: this.thread.replies_count,
+                locked: this.thread.locked
             };
+        },
+        methods: {
+            toggleLock() {
+                let uri = `/admin/threads/${this.thread.slug}/lock`;
+
+                axios[this.locked ? "delete" : "post"](uri);
+                this.locked = !this.locked;
+            }
         }
     }
 </script>

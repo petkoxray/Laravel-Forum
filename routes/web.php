@@ -3,8 +3,15 @@
 Auth::routes();
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register_confirm');
 
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'roles:admin'], function () {
+    Route::get('/', 'HomeController@index');
+    Route::post('/threads/{thread}/lock', 'LockedThreadsController@store')->name('lock_thread');
+    Route::delete('/threads/{thread}/lock', 'LockedThreadsController@destroy')->name('unlock_thread');
+});
+
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('user_profile');
-Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy')->name('remove_notification');
+Route::delete('/profiles/{user}/notifications/{notification}',
+    'UserNotificationsController@destroy')->name('remove_notification');
 Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index')->name('user_notifications');
 
 Route::get('api/users', "Api\UsersController@index")->middleware('auth')->name('users');
@@ -32,5 +39,3 @@ Route::delete('/replies/{reply}', 'RepliesController@destroy')->name('destroy_re
 Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy')->name('favorite_reply');
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store')->name('favorite_reply');
 Route::post('/replies/{reply}/best', 'BestRepliesController@store')->name('store_best_reply');
-
-Route::get('/admin', 'Admin\HomeController@index')->middleware('roles:admin');

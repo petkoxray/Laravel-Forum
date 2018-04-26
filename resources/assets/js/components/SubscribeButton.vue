@@ -7,7 +7,7 @@
         props: ['active'],
         computed: {
             classes() {
-                return ['btn', this.active ? 'btn-warning' : 'btn-primary']
+                return ['btn', this.active ? 'btn-default' : 'btn-primary']
             },
             text() {
                 return this.active ? 'Unsubscribe' : 'Subscribe'
