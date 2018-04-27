@@ -10,13 +10,13 @@ class RoleMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next, $role)
     {
-        if (Auth::guest()) {
+        if (auth()->guest()) {
             return redirect('/');
         }
 
@@ -24,10 +24,10 @@ class RoleMiddleware
             ? $role
             : explode('|', $role);
 
-        if (! Auth::user()->hasAnyRole($roles)) {
+        if (!auth()->user()->hasAnyRole($roles)) {
             return redirect('/');
         }
-        
+
         return $next($request);
     }
 }

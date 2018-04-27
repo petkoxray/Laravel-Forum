@@ -15,7 +15,7 @@ class UserSettingsController extends Controller
 
     public function store_avatar(User $user)
     {
-        $this->validate(request(), [
+        request()->validate([
             'avatar' => ['required', 'image']
         ]);
 

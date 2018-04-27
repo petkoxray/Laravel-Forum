@@ -104,13 +104,19 @@ class ThreadsController extends Controller
     /**
      * Update the specified thread in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\Thread $thread
      * @return Response
      */
-    public function update(Request $request, Thread $thread)
+    public function update(Thread $thread)
     {
-        //
+        $this->authorize('update', $thread);
+
+        $thread->update(request()->validate([
+            'title' => 'required|spamfree',
+            'body' => 'required|spamfree'
+        ]));
+
+        return $thread;
     }
 
     /**

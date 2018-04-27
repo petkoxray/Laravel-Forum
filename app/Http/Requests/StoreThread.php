@@ -26,7 +26,8 @@ class StoreThread extends FormRequest
         return [
             'title' => 'required',
             'body' => 'required|spamfree',
-            'channel_id' => 'required|exists:channels,id'
+            'channel_id' => 'required|exists:channels,id',
+            'g-recaptcha-response' => 'required|recaptcha'
         ];
     }
 }

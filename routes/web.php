@@ -27,6 +27,8 @@ Route::get('/threads/create', 'ThreadsController@create')->name('create_thread')
 Route::get('/threads/{channel}', 'ThreadsController@index');
 Route::get('/threads/{channel}/{thread}', 'ThreadsController@show')->name('show_thread');
 Route::delete('/threads/{channel}/{thread}', 'ThreadsController@destroy')->name('delete_thread');
+Route::patch('/threads/{channel}/{thread}', 'ThreadsController@update')->name('update_thread');
+
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptions@store')->name('subscribe_to_thread');
 Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptions@destroy')->name('subscribe_to_thread');
 

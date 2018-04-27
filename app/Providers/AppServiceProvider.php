@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
+        \Validator::extend('recaptcha', 'App\Rules\Recaptcha@passes');
 
         \Blade::if('role', function ($role) {
             return auth()->check() && auth()->user()->hasRole($role);
