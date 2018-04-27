@@ -12,8 +12,6 @@ use Illuminate\Http\Response;
 
 class ThreadsController extends Controller
 {
-    const REPLIES_PER_PAGE = 10;
-
     /**
      * @var Trending
      */
@@ -107,7 +105,7 @@ class ThreadsController extends Controller
      * @param  \App\Models\Thread $thread
      * @return Response
      */
-    public function update(Thread $thread)
+    public function update(Channel $channel, Thread $thread)
     {
         $this->authorize('update', $thread);
 

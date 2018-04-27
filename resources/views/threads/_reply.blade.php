@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        @can ('update', $reply)
+        @can('update', $reply)
             <div class="panel-footer level">
                 <button type="submit" @click="editing = true" class="btn btn-xs">Edit</button>
                 <button type="submit" @click="destroy" class="btn btn-danger btn-xs">Delete</button>

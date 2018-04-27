@@ -3,6 +3,7 @@
         <div class="panel-heading">
             <div class="level">
                 <h5 class="flex">
+                    <img :src="reply.owner.avatar_path" width="25" height="25" class="mr-1">
                     <a :href="'/profiles/' + reply.owner.name"
                        v-text="reply.owner.name">
                     </a> said <span v-text="ago"></span>
@@ -16,7 +17,7 @@
 
         <div class="panel-body">
             <div v-if="editing">
-                <form @submit="update">
+                <form @submit.prevent="update">
                     <div class="form-group">
                         <textarea class="form-control" v-model="body" required></textarea>
                     </div>
@@ -35,67 +36,69 @@
                 <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
             </div>
 
-            <button class="btn btn-xs btn-default ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best Reply?</button>
+            <button class="btn btn-xs btn-default ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)">
+                Best Reply?
+            </button>
         </div>
     </div>
 </template>
 
 <script>
-    import Favorite from './Favorite.vue';
-    import moment from 'moment';
+    import Favorite from "./Favorite.vue";
+    import moment from "moment";
 
     export default {
-        props: ['reply'],
+        props: ["reply"],
 
-        components: { Favorite },
+        components: {Favorite},
 
         data() {
             return {
                 editing: false,
                 id: this.reply.id,
                 body: this.reply.body,
-                isBest: this.reply.isBest,
+                isBest: this.reply.isBest
             };
         },
 
         computed: {
             ago() {
-                return moment(this.reply.created_at).fromNow() + '...';
+                return moment(this.reply.created_at).fromNow() + "...";
             }
         },
 
-        created () {
-            window.events.$on('best-reply-selected', id => {
-                this.isBest = (id === this.id);
+        created() {
+            window.events.$on("best-reply-selected", id => {
+                this.isBest = id === this.id;
             });
         },
 
         methods: {
             update() {
-                axios.patch(
-                    '/replies/' + this.id, {
+                axios
+                    .patch("/replies/" + this.id, {
                         body: this.body
                     })
                     .catch(error => {
-                        flash(error.response.data, 'danger');
+                        flash(error.response.data, "danger");
                     });
 
                 this.editing = false;
 
-                flash('Updated!');
+                flash("Updated!");
             },
 
             destroy() {
-                axios.delete('/replies/' + this.id);
+                axios.delete("/replies/" + this.id);
 
-                this.$emit('deleted', this.id);
+                this.$emit("deleted", this.id);
             },
 
             markBestReply() {
-                axios.post('/replies/' + this.id + '/best');
+                axios.post("/replies/" + this.id + "/best");
 
-                window.events.$emit('best-reply-selected', this.id);
+                window.events.$emit("best-reply-selected", this.id);
             }
         }
-    }
+    };
 </script>

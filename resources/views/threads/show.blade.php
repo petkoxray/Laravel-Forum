@@ -1,72 +1,37 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('header')
-    <link href="{{ asset('css/vendor/jquery.atwho.css') }}" rel="stylesheet">
+<link href="{{ asset('css/vendor/jquery.atwho.css') }}" rel="stylesheet">
 @endsection
-
+ 
 @section('content')
-    <thread-view :thread="{{ $thread }}" inline-template>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="level">
-                                <img src="{{ $thread->creator->avatar_path }}"
-                                     alt="{{ $thread->creator->name }}"
-                                     width="25"
-                                     height="25"
-                                     class="mr-1">
-                                <span class="flex">
-                                    <a href="{{ route('user_profile', $thread->creator) }}">{{ $thread->creator->name }}</a> posted:
-                                    {{ $thread->title }}
-                                </span>
+<thread-view :thread="{{ $thread }}" inline-template>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" v-cloak>
+                @include('threads._thread')
 
-                                @can ('update', $thread)
-                                    <form action="{{ $thread->path() }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
+                <replies @added="repliesCount++" @removed="repliesCount--"></replies>
+            </div>
 
-                                        <button type="submit" class="btn btn-link">Delete Thread</button>
-                                    </form>
-                                @endcan
-                            </div>
-                        </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>
+                            This thread was published {{ $thread->created_at->diffForHumans() }} by
+                            <a href="#">{{ $thread->creator->name }}</a>, and currently has <span v-text="repliesCount"></span> 
+                            {{ str_plural('comment', $thread->replies_count) }} .
+                        </p>
 
-                        <div class="panel-body">
-                            {{ $thread->body }}
-                        </div>
-                    </div>
-
-                    <replies @added="repliesCount++" @removed="repliesCount--"></replies>
-
-                    {{--{{ $replies->links() }}--}}
-                </div>
-
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <p>
-                                This thread was published {{ $thread->created_at->diffForHumans() }} by
-                                <a href="#">{{ $thread->creator->name }}</a>, and currently
-                                has <span
-                                        v-text="repliesCount"></span> {{ str_plural('comment', $thread->replies_count) }}
-                                .
-                            </p>
-
-                            <div class="level">
-                                <subscribe-button :active="{{json_encode($thread->isSubscribedTO)}}"
-                                                  v-if="signedIn"></subscribe-button>
-                                @role('admin')
-                                    <button class="btn btn-warning ml-a"
-                                            @click="toggleLock"
-                                            v-text="locked ? 'Unlock' : 'Lock'"></button>
-                                @endrole
-                            </div>
+                        <div class="level">
+                            <subscribe-button :active="{{json_encode($thread->isSubscribedTO)}}" v-if="signedIn"></subscribe-button>
+                            @role('admin')
+                                <button class="btn btn-warning ml-a" @click="toggleLock" v-text="locked ? 'Unlock' : 'Lock'"></button>    
+                            @endrole
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </thread-view>
+    </div>
+</thread-view>
 @endsection
