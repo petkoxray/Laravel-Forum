@@ -19,11 +19,11 @@
             <div v-if="editing">
                 <form @submit.prevent="update">
                     <div class="form-group">
-                        <textarea class="form-control" v-model="body" required></textarea>
+                        <wysiwyg v-model="body"></wysiwyg>
                     </div>
 
                     <button class="btn btn-xs btn-primary">Update</button>
-                    <button class="btn btn-xs btn-link" @click="editing = false" type="button">Cancel</button>
+                    <button class="btn btn-xs btn-link" @click="resetBody" type="button">Cancel</button>
                 </form>
             </div>
 
@@ -32,7 +32,7 @@
 
         <div class="panel-footer level" v-if="authorize('owns', reply) || authorize('owns', reply.thread)">
             <div v-if="authorize('owns', reply)">
-                <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
+                <button class="btn btn-xs mr-1" @click="editing = true" v-if="!editing">Edit</button>
                 <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
             </div>
 
@@ -79,11 +79,12 @@
                     .patch("/replies/" + this.id, {
                         body: this.body
                     })
+                    .then(() => {
+                        this.editing = false;
+                    })
                     .catch(error => {
                         flash(error.response.data, "danger");
                     });
-
-                this.editing = false;
 
                 flash("Updated!");
             },
@@ -98,6 +99,11 @@
                 axios.post("/replies/" + this.id + "/best");
 
                 window.events.$emit("best-reply-selected", this.id);
+            },
+
+            resetBody() {
+                this.editing = false;
+                this.body = this.reply.body
             }
         }
     };
