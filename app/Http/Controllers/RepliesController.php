@@ -23,7 +23,7 @@ class RepliesController extends Controller
      */
     public function index($channelId, Thread $thread)
     {
-        return $thread->replies()->paginate(10);
+        return $thread->replies()->paginate(config('forum.pagination.replies'));
     }
 
     /**

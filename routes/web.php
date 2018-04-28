@@ -16,8 +16,10 @@ Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index'
 
 Route::get('api/users', "Api\UsersController@index")->middleware('auth')->name('users');
 
-Route::get('users/{user}/settings/', 'UserSettingsController@index')->middleware('auth')->name('user_settings');
-Route::post('users/{user}/avatar', 'UserSettingsController@store_avatar')->middleware('auth')->name('store_avatar');
+Route::get('users/{user}/settings/', 'UserSettingsController@index')
+    ->middleware('auth')->name('user_settings');
+Route::post('users/{user}/avatar', 'UserSettingsController@store_avatar')
+    ->middleware('auth')->name('store_avatar');
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -32,12 +34,13 @@ Route::patch('/threads/{channel}/{thread}', 'ThreadsController@update')->name('u
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptions@store')->name('subscribe_to_thread');
 Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptions@destroy')->name('subscribe_to_thread');
 
-
 Route::get('/threads/{channel}/{thread}/replies', 'RepliesController@index');
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store')->name('store_reply');
 Route::patch('/replies/{reply}', 'RepliesController@update')->name('update_reply');
 Route::delete('/replies/{reply}', 'RepliesController@destroy')->name('destroy_reply');
 
-Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy')->name('favorite_reply');
-Route::post('/replies/{reply}/favorites', 'FavoritesController@store')->name('favorite_reply');
+Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy')
+    ->middleware('auth')->name('unfavorite_reply');
+Route::post('/replies/{reply}/favorites', 'FavoritesController@store')
+    ->middleware('auth')->name('favorite_reply');
 Route::post('/replies/{reply}/best', 'BestRepliesController@store')->name('store_best_reply');

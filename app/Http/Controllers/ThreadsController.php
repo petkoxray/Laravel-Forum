@@ -39,7 +39,7 @@ class ThreadsController extends Controller
         }
 
         return view('threads.index', [
-            'threads' => $threads->paginate(5),
+            'threads' => $threads->paginate(config('forum.pagination.threads')),
             'trending' => $this->trending->get()
         ]);
     }
@@ -89,21 +89,12 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified thread.
-     *
-     * @param  Thread $thread
-     * @return Response
-     */
-    public function edit(Thread $thread)
-    {
-        //
-    }
-
-    /**
      * Update the specified thread in storage.
      *
+     * @param Channel $channel
      * @param  \App\Models\Thread $thread
-     * @return Response
+     * @return Thread
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Channel $channel, Thread $thread)
     {
