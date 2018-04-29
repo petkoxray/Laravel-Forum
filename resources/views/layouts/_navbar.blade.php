@@ -55,6 +55,20 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div class="pull-right">
+                        <form class="navbar-form pull-right" method="get" role="search"
+                              action="{{route('threads_search')}}">
+                            <div class="input-group">
+                                <input name="q" type="text" class="form-control" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><span
+                                                class="glyphicon glyphicon-search"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
                 <!-- Authentication Links -->
                 @guest
                     <li><a href="{{ route('login') }}">Login</a></li>
