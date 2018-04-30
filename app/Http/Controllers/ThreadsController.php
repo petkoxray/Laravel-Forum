@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\ThreadFilters;
-use App\Http\Requests\StoreThread;
+use App\Models\Thread;
 use App\Models\Channel;
 use App\Widgets\Trending;
 use Illuminate\Http\Request;
-use App\Models\Thread;
 use Illuminate\Http\Response;
+use App\Filters\ThreadFilters;
+use App\Http\Requests\StoreThread;
 
 class ThreadsController extends Controller
 {

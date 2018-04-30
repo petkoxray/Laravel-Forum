@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activity;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Activity;
 
 class ProfilesController extends Controller
 {
-
     /**
-     * Show a user profile and activity feed
+     * Show a user profile and activity feed.
      *
      * @param User $user
      * @return \Illuminate\Http\Response

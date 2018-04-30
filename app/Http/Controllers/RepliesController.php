@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReply;
-use App\Models\Channel;
 use App\Models\Reply;
 use App\Models\Thread;
+use App\Models\Channel;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreReply;
 
 class RepliesController extends Controller
 {
@@ -16,7 +16,7 @@ class RepliesController extends Controller
     }
 
     /**
-     * Fetch paginated  replies
+     * Fetch paginated  replies.
      *
      * @param $channelId
      * @param Thread $thread
@@ -27,7 +27,7 @@ class RepliesController extends Controller
     }
 
     /**
-     * Add a reply to the thread
+     * Add a reply to the thread.
      *
      * @param StoreReply $request
      * @param Channel $channel
@@ -43,7 +43,7 @@ class RepliesController extends Controller
     }
 
     /**
-     * Edit a reply
+     * Edit a reply.
      *
      * @param Reply $reply
      * @throws \Illuminate\Auth\Access\AuthorizationException
@@ -58,7 +58,7 @@ class RepliesController extends Controller
     }
 
     /**
-     * Delete a reply
+     * Delete a reply.
      *
      * @param Reply $reply
      * @return \Illuminate\Http\RedirectResponse

@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use App\Utils\Spam\SpamService;
 use Exception;
+use App\Utils\Spam\SpamService;
 use Illuminate\Contracts\Validation\Rule;
 
 class SpamFree implements Rule
