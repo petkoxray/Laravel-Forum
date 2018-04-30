@@ -10,7 +10,7 @@ class ThreadSubscription extends Model
     protected $guarded = [];
 
     /**
-     * Subscription belongs to user
+     * Subscription belongs to user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -20,7 +20,7 @@ class ThreadSubscription extends Model
     }
 
     /**
-     * Subscription belongs to thread
+     * Subscription belongs to thread.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

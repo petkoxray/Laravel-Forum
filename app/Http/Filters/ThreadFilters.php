@@ -36,6 +36,6 @@ class ThreadFilters extends Filters
 
     protected function unanswered()
     {
-       return $this->builder->withCount('replies')->has('replies', 0);
+        return $this->builder->withCount('replies')->has('replies', 0);
     }
 }

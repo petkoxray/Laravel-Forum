@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Thread;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class LockedThreadsController extends Controller
 {
     /**
-     * Lock a Thread
+     * Lock a Thread.
      *
      * @param Thread $thread
      */
@@ -19,7 +18,7 @@ class LockedThreadsController extends Controller
     }
 
     /**
-     * Unlock a Thread
+     * Unlock a Thread.
      *
      * @param Thread $thread
      */

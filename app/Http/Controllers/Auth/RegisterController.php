@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Mail\PleaseConfirmYourEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\PleaseConfirmYourEmail;
-use App\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -66,16 +66,16 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $userRole = Role::where('name', 'user')->first();
-        
+
         return User::forceCreate([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, '')
+            'confirmation_token' => str_limit(md5($data['email'].str_random()), 25, '')
         ])->assignRole($userRole);
     }
 
-        /**
+    /**
      * The user has been registered.
      *
      * @param  \App\User $user

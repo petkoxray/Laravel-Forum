@@ -2,15 +2,15 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ParticipateInThreadsTest extends TestCase
 {
     use DatabaseMigrations;
 
     /** @test */
-    function unauthenticated_users_may_not_add_replies()
+    public function unauthenticated_users_may_not_add_replies()
     {
         $this->withExceptionHandling()
             ->post('/threads/some-channel/1/replies', [])
@@ -18,32 +18,32 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    function an_authenticated_user_may_participate_in_forum_threads()
+    public function an_authenticated_user_may_participate_in_forum_threads()
     {
         $this->signIn();
 
         $thread = create('App\Models\Thread');
         $reply = make('App\Models\Reply');
 
-        $this->post($thread->path() . '/replies', $reply->toArray());
+        $this->post($thread->path().'/replies', $reply->toArray());
 
         $this->assertDatabaseHas('replies', ['body' => $reply->body]);
     }
 
     /** @test */
-    function a_reply_requires_a_body()
+    public function a_reply_requires_a_body()
     {
         $this->withExceptionHandling()->signIn();
 
         $thread = create('App\Models\Thread');
         $reply = make('App\Models\Reply', ['body' => null]);
 
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->post($thread->path().'/replies', $reply->toArray())
             ->assertSessionHasErrors('body');
     }
 
     /** @test */
-    function unauthorized_users_cannot_delete_replies()
+    public function unauthorized_users_cannot_delete_replies()
     {
         $this->withExceptionHandling();
 
@@ -56,8 +56,9 @@ class ParticipateInThreadsTest extends TestCase
             ->delete("/replies/{$reply->id}")
             ->assertStatus(403);
     }
+
     /** @test */
-    function authorized_users_can_delete_replies()
+    public function authorized_users_can_delete_replies()
     {
         $this->signIn();
 

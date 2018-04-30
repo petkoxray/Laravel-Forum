@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thread;
-use Illuminate\Http\Request;
 
 class ThreadSubscriptions extends Controller
 {
@@ -13,7 +12,7 @@ class ThreadSubscriptions extends Controller
     }
 
     /**
-     * Subscribe to forum thread
+     * Subscribe to forum thread.
      *
      * @param $channelId
      * @param Thread $thread
@@ -24,12 +23,12 @@ class ThreadSubscriptions extends Controller
     }
 
     /**
-     * Unsubscribe from forum thread
+     * Unsubscribe from forum thread.
      *
      * @param $channelId
      * @param Thread $thread
      */
-    public function destroy($channelId, Thread $thread )
+    public function destroy($channelId, Thread $thread)
     {
         $thread->unsubscribe();
     }

@@ -35,7 +35,7 @@ trait RecordsActivity
     }
 
     /**
-     * Records an Activity in database
+     * Records an Activity in database.
      *
      * @param $event
      * @throws \ReflectionException
@@ -58,6 +58,7 @@ trait RecordsActivity
     protected function getActivityType($event)
     {
         $type = strtolower((new \ReflectionClass($this))->getShortName());
+
         return "{$event}_{$type}";
     }
 

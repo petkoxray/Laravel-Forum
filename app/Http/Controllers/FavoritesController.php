@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class FavoritesController extends Controller
 {
     /**
-     * Like a reply
+     * Like a reply.
      *
      * @param Reply $reply
      * @return Request
@@ -21,7 +21,7 @@ class FavoritesController extends Controller
     }
 
     /**
-     * Unlike a reply
+     * Unlike a reply.
      *
      * @param Reply $reply
      */

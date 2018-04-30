@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Traits\Favoritable;
 use App\Models\Traits\RecordsActivity;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
@@ -31,7 +31,7 @@ class Reply extends Model
     protected $with = ['owner', 'favorites'];
 
     /**
-     * A reply have owner
+     * A reply have owner.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -51,13 +51,13 @@ class Reply extends Model
     }
 
     /**
-     * Reply path
+     * Reply path.
      *
      * @return string
      */
     public function path()
     {
-        return $this->thread->path() . "#reply-{$this->id}";
+        return $this->thread->path()."#reply-{$this->id}";
     }
 
     /**
@@ -71,7 +71,7 @@ class Reply extends Model
     }
 
     /**
-     * Return all mentioned Users in a Reply
+     * Return all mentioned Users in a Reply.
      *
      * @return array
      */
@@ -108,7 +108,7 @@ class Reply extends Model
     }
 
     /**
-     * Determine if current reply is marked as best
+     * Determine if current reply is marked as best.
      *
      * @return bool
      */
@@ -118,7 +118,7 @@ class Reply extends Model
     }
 
     /**
-     *Determine if current reply is marked as best attribute
+     *Determine if current reply is marked as best attribute.
      *
      * @return bool
      */

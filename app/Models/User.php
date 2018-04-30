@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Traits\RoleTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Traits\RoleTrait;
 
 class User extends Authenticatable
 {
@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get all user threads
+     * Get all user threads.
      *
      * @return \Illuminate\Database\Query\Builder|static
      */
@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return user activities
+     * Return user activities.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -64,7 +64,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Return user last reply
+     * Return user last reply.
      *
      * @return \Illuminate\Database\Query\Builder|static
      */
@@ -81,11 +81,11 @@ class User extends Authenticatable
      */
     public function getAvatarPathAttribute($avatar)
     {
-        return $avatar ? asset('storage/' . $avatar) : asset('images/avatars/default.png');
+        return $avatar ? asset('storage/'.$avatar) : asset('images/avatars/default.png');
     }
 
     /**
-     *Confirm user account
+     *Confirm user account.
      */
     public function confirm()
     {

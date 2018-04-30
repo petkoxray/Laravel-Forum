@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserNotificationsController extends Controller
 {
@@ -13,7 +12,7 @@ class UserNotificationsController extends Controller
     }
 
     /**
-     * Return a unread notifications
+     * Return a unread notifications.
      *
      * @return mixed
      */
@@ -23,7 +22,7 @@ class UserNotificationsController extends Controller
     }
 
     /**
-     * Mark a noftification as read
+     * Mark a noftification as read.
      *
      * @param User $user
      * @param $notificationId

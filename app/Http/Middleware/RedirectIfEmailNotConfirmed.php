@@ -15,7 +15,7 @@ class RedirectIfEmailNotConfirmed
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->confirmed) {
+        if (! $request->user()->confirmed) {
             return redirect()->route('home')
                 ->with('flash', 'Please confirm your email!');
         }
