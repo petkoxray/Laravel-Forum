@@ -24,7 +24,7 @@ class RoleMiddleware
             ? $role
             : explode('|', $role);
 
-        if (!auth()->user()->hasAnyRole($roles)) {
+        if (! auth()->user()->hasAnyRole($roles)) {
             return redirect('/');
         }
 

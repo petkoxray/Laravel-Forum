@@ -2,18 +2,17 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\User;
 
 class PleaseConfirmYourEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * @var User $user
+     * @var User
      */
     public $user;
 

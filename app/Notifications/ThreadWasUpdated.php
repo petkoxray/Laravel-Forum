@@ -6,7 +6,6 @@ use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ThreadWasUpdated extends Notification
 {
@@ -36,6 +35,7 @@ class ThreadWasUpdated extends Notification
     {
         return ['database'];
     }
+
 //
 //    /**
 //     * Get the mail representation of the notification.
@@ -60,7 +60,7 @@ class ThreadWasUpdated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->reply->owner->name . ' replied to ' . $this->thread->title,
+            'message' => $this->reply->owner->name.' replied to '.$this->thread->title,
             'link' => $this->reply->path()
         ];
     }
