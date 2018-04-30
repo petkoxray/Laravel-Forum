@@ -12,11 +12,11 @@
                         Posted
                         by:
                         <img src="{{ $thread->creator->avatar_path }}"
-                             alt="{{ $thread->creator->name }}"
+                             alt="{{ $thread->creator->username }}"
                              width="25"
                              height="25"
                              class="mr-1">
-                        <a href="{{route('user_profile', $thread->creator)}}"> {{$thread->creator->name}}</a>
+                        <a href="{{route('user_profile', $thread->creator)}}"> {{$thread->creator->username}}</a>
 
                     </h5>
                 </div>

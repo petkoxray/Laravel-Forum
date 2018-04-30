@@ -7,7 +7,7 @@
 
                 <div class="page-header">
                     <h1>
-                        {{ $profileUser->name }}
+                        {{ $profileUser->username }}
                     </h1>
                 </div>
 

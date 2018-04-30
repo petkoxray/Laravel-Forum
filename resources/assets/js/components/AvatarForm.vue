@@ -4,7 +4,7 @@
 
             <img :src="avatar" width="200" height="200" class="mr-1">
 
-            <h1 v-text="user.name"></h1>
+            <h1 v-text="user.username"></h1>
 
             <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
                 <image-upload name="avatar" class="mr-1" @loaded="onLoad"></image-upload>
@@ -45,7 +45,7 @@
 
                 data.append('avatar', avatar);
 
-                axios.post(`/users/${this.user.name}/avatar`, data)
+                axios.post(`/users/${this.user.username}/avatar`, data)
                     .then(() => flash('Avatar uploaded!'));
             }
         }

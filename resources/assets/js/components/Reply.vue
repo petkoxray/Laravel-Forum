@@ -4,8 +4,8 @@
             <div class="level">
                 <h5 class="flex">
                     <img :src="reply.owner.avatar_path" width="25" height="25" class="mr-1">
-                    <a :href="'/profiles/' + reply.owner.name"
-                       v-text="reply.owner.name">
+                    <a :href="'/profiles/' + reply.owner.username"
+                       v-text="reply.owner.username">
                     </a> said <span v-text="ago"></span>
                 </h5>
 

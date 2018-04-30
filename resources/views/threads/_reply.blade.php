@@ -3,8 +3,8 @@
         <div class="panel-heading">
             <div class="level">
                 <h5 class="flex">
-                    <a href="{{route('user_profile', $reply->owner->name)}}">
-                        {{ $reply->owner->name }}
+                    <a href="{{route('user_profile', $reply->owner->username)}}">
+                        {{ $reply->owner->username }}
                     </a> said {{ $reply->created_at->diffForHumans() }}...
                 </h5>
 

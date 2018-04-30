@@ -17,14 +17,14 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Admin Adminov',
+            'username' => 'Admin_Adminov',
             'email' => 'admin@abv.bg',
             'password' => Hash::make('123456'),
             'confirmed' => true
         ])->assignRole($adminRole);
 
         User::create([
-            'name' => 'Pesho Peshev',
+            'username' => 'Pesho_Peshev',
             'email' => 'pesho@abv.bg',
             'password' => Hash::make('123456'),
             'confirmed' => true

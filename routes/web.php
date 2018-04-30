@@ -26,7 +26,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/threads', 'ThreadsController@index')->name('all_threads');
 Route::post('/threads', 'ThreadsController@store')->name('store_new_thread')->middleware('must-be-confirmed');
 Route::get('/threads/search/', 'SearchController@show')->name('threads_search');
-Route::get('/threads/create', 'ThreadsController@create')->name('create_thread');
+Route::get('/threads/create', 'ThreadsController@create')->name('create_thread')->middleware('must-be-confirmed');
 Route::get('/threads/{channel}', 'ThreadsController@index');
 Route::get('/threads/{channel}/{thread}', 'ThreadsController@show')->name('show_thread');
 Route::delete('/threads/{channel}/{thread}', 'ThreadsController@destroy')->name('delete_thread');

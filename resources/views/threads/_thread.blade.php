@@ -37,13 +37,13 @@
     <div class="panel-heading">
         <div class="level">
             <img src="{{ $thread->creator->avatar_path }}"
-                 alt="{{ $thread->creator->name }}"
+                 alt="{{ $thread->creator->username }}"
                  width="25"
                  height="25"
                  class="mr-1">
 
             <span class="flex">
-                <a href="{{ route('user_profile', $thread->creator) }}">{{ $thread->creator->name }}</a> posted: <span v-text="title"></span>
+                <a href="{{ route('user_profile', $thread->creator) }}">{{ $thread->creator->username }}</a> posted: <span v-text="title"></span>
             </span>
         </div>
     </div>
