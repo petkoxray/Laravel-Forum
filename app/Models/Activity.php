@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     /**
-     * Don't auto apply mass assignment protection
+     * Don't auto apply mass assignment protection.
      *
      * @var array
      */
@@ -24,7 +24,7 @@ class Activity extends Model
     }
 
     /**
-     * Fetch User activity feed
+     * Fetch User activity feed.
      *
      * @param User $user
      * @param int $take

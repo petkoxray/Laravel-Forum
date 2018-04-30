@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Events\ThreadHasNewReply;
-use App\Filters\ThreadFilters;
-use App\Models\Traits\RecordsActivity;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Laravel\Scout\Searchable;
+use App\Filters\ThreadFilters;
+use App\Events\ThreadHasNewReply;
+use App\Models\Traits\RecordsActivity;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Thread extends Model
 {
@@ -52,7 +52,7 @@ class Thread extends Model
     }
 
     /**
-     * A Thread may have many replies
+     * A Thread may have many replies.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -62,7 +62,7 @@ class Thread extends Model
     }
 
     /**
-     * Get the creator of the Thread
+     * Get the creator of the Thread.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -72,7 +72,7 @@ class Thread extends Model
     }
 
     /**
-     * A Thread have a Channel
+     * A Thread have a Channel.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -143,7 +143,7 @@ class Thread extends Model
     }
 
     /**
-     * Subscribe User to thread
+     * Subscribe User to thread.
      */
     public function subscribe()
     {
@@ -153,7 +153,7 @@ class Thread extends Model
     }
 
     /**
-     * Unsubscribe user from thread
+     * Unsubscribe user from thread.
      */
     public function unsubscribe()
     {
@@ -161,7 +161,7 @@ class Thread extends Model
     }
 
     /**
-     * Get all Thread subscriptions
+     * Get all Thread subscriptions.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -178,7 +178,7 @@ class Thread extends Model
     }
 
     /**
-     * Mark a reply as best answer
+     * Mark a reply as best answer.
      *
      * @param Reply $reply
      */

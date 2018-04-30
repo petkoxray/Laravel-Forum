@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Exceptions\ThrottleException;
 use App\Models\Reply;
+use App\Exceptions\ThrottleException;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class StoreReply extends FormRequest
 {

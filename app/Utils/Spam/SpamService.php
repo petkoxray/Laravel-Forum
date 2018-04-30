@@ -2,14 +2,12 @@
 
 namespace App\Utils\Spam;
 
-use App\Utils\Spam\Rules\InvalidKeywords;
 use App\Utils\Spam\Rules\KeyHeldDown;
+use App\Utils\Spam\Rules\InvalidKeywords;
 
 /**
  * Custom example Class for managing Spam
- * Just for test (nothing special)
- *
- * @package App\Utils\Spam
+ * Just for test (nothing special).
  */
 class SpamService
 {

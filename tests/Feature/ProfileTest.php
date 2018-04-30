@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ProfilesTest extends TestCase
+class ProfileTest extends TestCase
 {
     use DatabaseMigrations;
 
     /** @test */
-    function a_user_has_a_profile()
+    public function a_user_has_a_profile()
     {
         $user = create('App\Models\User');
 
@@ -19,13 +19,13 @@ class ProfilesTest extends TestCase
     }
 
     /** @test */
-    function profiles_display_all_threads_created_by_the_associated_user()
+    public function profiles_display_all_threads_created_by_the_associated_user()
     {
         $this->signIn();
 
         $thread = create('App\Models\Thread', ['user_id' => auth()->id()]);
 
-        $this->get("/profiles/" . auth()->user()->name)
+        $this->get('/profiles/'.auth()->user()->name)
             ->assertSee($thread->title)
             ->assertSee($thread->body);
     }

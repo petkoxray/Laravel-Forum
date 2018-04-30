@@ -2,7 +2,6 @@
 
 use Faker\Generator as Faker;
 
-
 $factory->define(App\Models\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -17,7 +16,7 @@ $factory->define(App\Models\Thread::class, function (Faker $faker) {
         'user_id' => function () {
             return factory('App\Models\User')->create()->id;
         },
-        'channel_id' => function() {
+        'channel_id' => function () {
             return factory('App\Models\Channel')->create()->id;
         },
         'title' => $faker->sentence,

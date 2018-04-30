@@ -6,7 +6,6 @@ use App\Models\Role;
 
 trait RoleTrait
 {
-
     /**
      * The roles that belong to the user.
      */
@@ -16,7 +15,7 @@ trait RoleTrait
     }
 
     /**
-     * Assigning role to the user
+     * Assigning role to the user.
      *
      * @param Role $role
      * @return $this
@@ -67,7 +66,7 @@ trait RoleTrait
     }
 
     /**
-     * Check if user is Admin
+     * Check if user is Admin.
      */
     public function isAdmin(): bool
     {

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserSettingsController extends Controller
 {
     /**
-     * Get user settings view
+     * Get user settings view.
      *
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -20,7 +19,7 @@ class UserSettingsController extends Controller
     }
 
     /**
-     * Store avatar
+     * Store avatar.
      *
      * @param User $user
      */
