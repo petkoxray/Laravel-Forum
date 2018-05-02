@@ -1,4 +1,4 @@
-{{-- Editing the question. --}}
+{{-- Editing the thread. --}}
 <div class="panel panel-default" v-if="editing">
     <div class="panel-heading">
         <div class="level">
@@ -43,7 +43,9 @@
                  class="mr-1">
 
             <span class="flex">
-                <a href="{{ route('user_profile', $thread->creator) }}">{{ $thread->creator->username }}</a> posted: <span v-text="title"></span>
+                <a href="{{ route('user_profile', $thread->creator) }}">
+                    {{ $thread->creator->username }}</a> <span>({{$thread->creator->reputation}} XP)</span> posted: <span
+                        v-text="title"></span>
             </span>
         </div>
     </div>

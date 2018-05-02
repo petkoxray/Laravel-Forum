@@ -4,7 +4,7 @@ namespace App\Models\Traits;
 
 use App\Models\Role;
 
-trait RoleTrait
+trait HasRole
 {
     /**
      * The roles that belong to the user.

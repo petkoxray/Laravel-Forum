@@ -30,6 +30,19 @@ class Reply extends Model
      */
     protected $with = ['owner', 'favorites'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function (Reply $reply) {
+           $reply->owner->gainReputation(config('forum.reputation.reply_posted'));
+        });
+
+        static::deleting(function (Reply $reply) {
+            $reply->owner->loseReputation(config('forum.reputation.reply_posted'));
+        });
+    }
+
     /**
      * A reply have owner.
      *

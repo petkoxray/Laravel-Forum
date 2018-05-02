@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\RoleTrait;
+use App\Models\Traits\HasReputation;
+use App\Models\Traits\HasRole;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, RoleTrait;
+    use Notifiable, HasRole, HasReputation;
 
     /**
      * The attributes that are mass assignable.

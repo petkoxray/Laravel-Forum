@@ -7,7 +7,7 @@
 
                 <div class="page-header">
                     <h1>
-                        {{ $profileUser->username }}
+                        {{ $profileUser->username }} (<span>{{$profileUser->reputation}} XP)</span>
                     </h1>
                 </div>
 

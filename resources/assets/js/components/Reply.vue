@@ -6,7 +6,7 @@
                     <img :src="reply.owner.avatar_path" width="25" height="25" class="mr-1">
                     <a :href="'/profiles/' + reply.owner.username"
                        v-text="reply.owner.username">
-                    </a> said <span v-text="ago"></span>
+                    </a><span v-text="reputation"></span> said <span v-text="ago"></span>
                 </h5>
 
                 <div v-if="signedIn">
@@ -64,6 +64,9 @@
         computed: {
             ago() {
                 return moment(this.reply.created_at).fromNow() + "...";
+            },
+            reputation() {
+                return ` (${this.reply.owner.reputation} XP) `;
             }
         },
 

@@ -38,6 +38,12 @@ class Thread extends Model
 
         static::deleting(function (Thread $thread) {
             $thread->replies->each->delete();
+
+            $thread->creator->loseReputation(config('forum.reputation.thread_published'));
+        });
+
+        static::created(function (Thread $thread) {
+            $thread->creator->gainReputation(config('forum.reputation.thread_published'));
         });
     }
 
