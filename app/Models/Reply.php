@@ -35,7 +35,7 @@ class Reply extends Model
         parent::boot();
 
         static::created(function (Reply $reply) {
-           $reply->owner->gainReputation(config('forum.reputation.reply_posted'));
+            $reply->owner->gainReputation(config('forum.reputation.reply_posted'));
         });
 
         static::deleting(function (Reply $reply) {
