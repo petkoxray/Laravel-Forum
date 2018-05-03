@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasReputation;
 use App\Models\Traits\HasRole;
+use App\Models\Traits\HasReputation;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
