@@ -93,15 +93,17 @@
             },
 
             destroy() {
-                axios.delete("/replies/" + this.id);
+                axios.delete("/replies/" + this.id)
 
                 this.$emit("deleted", this.id);
             },
 
             markBestReply() {
-                axios.post("/replies/" + this.id + "/best");
-
-                window.events.$emit("best-reply-selected", this.id);
+                axios.post("/replies/" + this.id + "/best")
+                    .then(() => window.events.$emit("best-reply-selected", this.id))
+                    .catch((error) => {
+                        flash(error.response.data, 'danger');
+                    });
             },
 
             resetBody() {

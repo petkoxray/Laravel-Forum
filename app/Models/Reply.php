@@ -40,6 +40,10 @@ class Reply extends Model
 
         static::deleting(function (Reply $reply) {
             $reply->owner->loseReputation(config('forum.reputation.reply_posted'));
+
+            if ($reply->isBest()) {
+                $reply->thread->removeBestReply();
+            }
         });
     }
 
