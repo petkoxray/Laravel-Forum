@@ -93,7 +93,7 @@
             },
 
             destroy() {
-                axios.delete("/replies/" + this.id)
+                axios.delete("/replies/" + this.id);
 
                 this.$emit("deleted", this.id);
             },

@@ -88,16 +88,6 @@ class Thread extends Model
     }
 
     /**
-     * A thread can have a best reply.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function bestReply()
-    {
-        return $this->hasOne(Reply::class, 'thread_id');
-    }
-
-    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
@@ -194,6 +184,14 @@ class Thread extends Model
     }
 
     /**
+     * A thread can have a best reply.
+     */
+    public function bestReply()
+    {
+        return Reply::find($this->best_reply_id);
+    }
+
+    /**
      * Mark a reply as best answer.
      *
      * @param Reply $reply
@@ -203,7 +201,6 @@ class Thread extends Model
         if ($this->hasBestReply()) {
             $this->removeBestReply();
         }
-
         $this->update(['best_reply_id' => $reply->id]);
 
         $reply->owner->gainReputation(config('forum.reputation.best_reply_awarded'));
@@ -214,7 +211,7 @@ class Thread extends Model
      */
     public function removeBestReply()
     {
-        $this->bestReply->owner->loseReputation(config('forum.reputation.best_reply_awarded'));
+        $this->bestReply()->owner->loseReputation(config('forum.reputation.best_reply_awarded'));
 
         $this->update(['best_reply_id' => null]);
     }
