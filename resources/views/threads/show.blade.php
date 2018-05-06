@@ -25,7 +25,8 @@
                         <div class="level">
                             <subscribe-button :active="{{json_encode($thread->isSubscribedTO)}}" v-if="signedIn"></subscribe-button>
                             @role('admin')
-                                <button class="btn btn-warning ml-a" @click="toggleLock" v-text="locked ? 'Unlock' : 'Lock'"></button>    
+                                <button class="btn btn-warning ml-a" @click="toggleLock" v-text="locked ? 'Unlock' : 'Lock'"></button> 
+                                <button class="btn btn-warning ml-a" @click="togglePin" v-text="pinned ? 'Unpin' : 'Pin'"></button>       
                             @endrole
                         </div>
                     </div>

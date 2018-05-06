@@ -7,6 +7,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'role
     Route::get('/', 'HomeController@index');
     Route::post('/threads/{thread}/lock', 'LockedThreadsController@store')->name('lock_thread');
     Route::delete('/threads/{thread}/lock', 'LockedThreadsController@destroy')->name('unlock_thread');
+    Route::post('/threads/{thread}/pin', 'PinnedThreadsController@store')->name('pin_thread');
+    Route::delete('/threads/{thread}/pin', 'PinnedThreadsController@destroy')->name('unpin_thread');
 });
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('user_profile');

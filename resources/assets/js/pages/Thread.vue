@@ -11,6 +11,7 @@
             return {
                 repliesCount: this.thread.replies_count,
                 locked: this.thread.locked,
+                pinned: this.thread.pinned,
                 title: this.thread.title,
                 body: this.thread.body,
                 form: {},
@@ -26,9 +27,18 @@
             toggleLock () {
                 let uri = `/admin/threads/${this.thread.slug}/lock`;
 
-                axios[this.locked ? 'delete' : 'post'](uri);
+                axios[this.locked ? 'delete' : 'post'](uri)
+                .catch(e => console.log(e.response.data));
 
                 this.locked = ! this.locked;
+            },
+
+            togglePin() {
+                let uri = `/admin/threads/${this.thread.slug}/pin`;
+
+                axios[this.pinned ? 'delete' : 'post'](uri);
+
+                this.pinned = ! this.pinned;
             },
 
             update () {

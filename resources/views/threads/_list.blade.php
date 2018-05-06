@@ -5,6 +5,9 @@
                 <div class="flex">
                     <h4>
                         <a href="{{ $thread->path() }}">
+                            @if ($thread->pinned)
+                                <i class="icon-pushpin"></i>
+                            @endif
                             {{ $thread->title }}
                         </a>
                     </h4>

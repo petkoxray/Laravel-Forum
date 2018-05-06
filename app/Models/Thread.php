@@ -26,7 +26,15 @@ class Thread extends Model
      */
     protected $with = ['creator', 'channel'];
 
-    protected $append = ['isSubscribedTo'];
+  /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'locked' => 'boolean',
+        'pinned' => 'boolean'
+    ];
 
     protected static function boot()
     {

@@ -35,6 +35,10 @@
             flex: 1;
         }
 
+        .mr-05 {
+            margin-right: 0.5em;
+        }
+
         .mr-1 {
             margin-right: 1em;
         }
