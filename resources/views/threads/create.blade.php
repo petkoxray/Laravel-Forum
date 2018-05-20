@@ -43,7 +43,7 @@
                                 <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pull-right">
                                 <button type="submit" class="btn btn-primary">Publish</button>
                             </div>
                             @include('layouts._errors')

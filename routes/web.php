@@ -4,7 +4,10 @@ Auth::routes();
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register_confirm');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'roles:admin'], function () {
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('admin_home');
+    Route::post('/channels', 'ChannelsController@store')->name('admin_channels_store');
+    Route::get('/channels', 'ChannelsController@index')->name('admin_channels_all');
+    Route::get('/channels/create', 'ChannelsController@create')->name('admin_channels_create');
     Route::post('/threads/{thread}/lock', 'LockedThreadsController@store')->name('lock_thread');
     Route::delete('/threads/{thread}/lock', 'LockedThreadsController@destroy')->name('unlock_thread');
     Route::post('/threads/{thread}/pin', 'PinnedThreadsController@store')->name('pin_thread');

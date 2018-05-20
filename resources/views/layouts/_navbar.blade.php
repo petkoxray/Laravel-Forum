@@ -75,6 +75,16 @@
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                     <user-notifications></user-notifications>
+                    @role('admin')
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i class="icon-eye-open mr-05"></i> Admin Panel <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{route('admin_channels_all')}}">Manage Channels</a></li>
+                        </ul>
+                    </li>
+                    @endrole
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-expanded="false">
