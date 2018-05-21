@@ -16,7 +16,7 @@ class ChannelsController extends Controller
     }
 
     /**
-     * Show the form for creating a new channel
+     * Show the form for creating a new channel.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -26,7 +26,7 @@ class ChannelsController extends Controller
     }
 
     /**
-     * Store a new channel
+     * Store a new channel.
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
@@ -45,4 +45,3 @@ class ChannelsController extends Controller
             ->with('flash', 'Your channel has been created!');
     }
 }
-
