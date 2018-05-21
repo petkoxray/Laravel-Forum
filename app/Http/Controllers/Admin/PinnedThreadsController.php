@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Thread;
+use App\Http\Controllers\Controller;
 
 class PinnedThreadsController extends Controller
 {
-
     /**
-     * Pin a Thread
+     * Pin a Thread.
      *
      * @param Thread $thread
      */
@@ -20,7 +18,7 @@ class PinnedThreadsController extends Controller
     }
 
     /**
-     * Unpin a Thread
+     * Unpin a Thread.
      *
      * @param Thread $thread
      */

@@ -26,7 +26,7 @@ class Thread extends Model
      */
     protected $with = ['creator', 'channel'];
 
-  /**
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -231,7 +231,7 @@ class Thread extends Model
      */
     public function hasBestReply()
     {
-        return !is_null($this->best_reply_id);
+        return ! is_null($this->best_reply_id);
     }
 
     public function toSearchableArray()
