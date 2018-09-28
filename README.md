@@ -1,15 +1,16 @@
-# Forum built with Laravel and Vue
+# Forum built with Laravel and VueJS
 ***
 
 ### Functionalities
-- Authrozitation and Roles (Admin, User)
+- Authentication and Roles (Admin, User)
+- User confirmation with email
 - Users can create / edit threads, replies, like replies, mark best reply (if author of thread) subscribe to threads (and receive notifications for new replies)
 - Users have activities and reputation in their profiles and can upload avatars
 - Users can be mentioned in reply (github style) / thread and receive notification for that
 - Edit and create reply / thread WYSIWYG style 
 - Google recaptcha validation for creating threads
 - Redis for caching
-- User confirmation with email
+- Search functionality for Threads
 - and much more...
 
 ## Instalation
